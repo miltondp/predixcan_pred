@@ -118,7 +118,7 @@ class TranscriptionMatrix:
                                                 chunks=(n_genes_chunk, n_samples_chunk),
                                                 dtype=np.dtype('float32'), scaleoffset=4, compression='gzip')
 
-        if gene in self.gene_index and len(ref_allele) == 1:  # assumes dosage coding 0 to 2
+        if gene in self.gene_index and ref_allele in self.complements.keys():  # assumes dosage coding 0 to 2
             # assumes non-ambiguous SNPs to resolve strand issues:
             if ref_allele == allele or self.complements[ref_allele] == allele:
                 self.D[self.gene_index[gene], :] += dosage_row * weight
